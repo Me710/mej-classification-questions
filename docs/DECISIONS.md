@@ -41,7 +41,7 @@ Application (`04b_resolve_labels.py`, sortie `data/label_corrections_auto.csv`) 
 | Texte + plateforme + programme | 13 |
 | **Total** | **273** |
 
-Les 147 corrections portant sur une question avec image, sans confirmation de la plateforme, sont marquées `a_verifier` : un nombre négatif pourrait figurer dans l'image. Une correction manuelle (`data/label_corrections.csv`) l'emporte toujours sur une correction automatique.
+Les 147 corrections portant sur une question avec image, sans confirmation de la plateforme, sont marquées `a_verifier` : un nombre négatif pourrait figurer dans l'image. Une correction manuelle (`data/label_corrections.csv`) l'emporte toujours sur une correction automatique. Pour désactiver les corrections automatiques : `APPLY_AUTO_CORRECTIONS = False` dans `common.py`.
 
 Effet sur la baseline de contrôle (TF-IDF + régression logistique, 5 plis, entrée `x_stem_choices`) : l'exactitude passe de 0,646 à 0,757 sur le sous-domaine, et le macro-F1 de 0,576 à 0,636. La comparaison n'est pas strictement à l'identique : 17 classes après correction contre 18 avant, et un découpage recalculé.
 

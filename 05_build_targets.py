@@ -8,7 +8,7 @@ import re
 import numpy as np
 import pandas as pd
 
-from common import (LABEL_SOURCE, LEVEL_YEAR, LEVELS, META_LEVEL, MIN_CLASS_COUNT, PREP, PROCESSED, REPORTS, SEED,
+from common import (APPLY_AUTO_CORRECTIONS, LABEL_SOURCE, LEVEL_YEAR, LEVELS, META_LEVEL, MIN_CLASS_COUNT, PREP, PROCESSED, REPORTS, SEED,
                     load, save)
 
 m = load("master_raw")
@@ -39,7 +39,7 @@ df["label_corrected"] = False
 df["label_correction_rule"] = ""
 for path, tag in ((PROCESSED.parent / "label_corrections_auto.csv", "auto"),
                   (PROCESSED.parent / "label_corrections.csv", "manuelle")):
-    if not path.exists():
+    if not path.exists() or (tag == "auto" and not APPLY_AUTO_CORRECTIONS):
         continue
     corr = pd.read_csv(path, dtype=str, encoding="utf-8-sig").dropna(subset=["sous_domaine_corrige"])
     rule = corr.regle if "regle" in corr else pd.Series(tag, index=corr.index)
@@ -105,10 +105,15 @@ df["cx_proxy"] = pd.qcut(df.cx_proxy_score.rank(method="first"), 3, labels=["fai
 # annotation de référence (annotations/complexite_annotateur*.csv) : moyenne arrondie si plusieurs annotateurs
 gold_files = sorted((PREP / "annotations").glob("complexite_annotateur*.csv"))
 if gold_files:
-    g = pd.concat([pd.read_csv(f, encoding="utf-8-sig")[["id", "complexite"]] for f in gold_files])
+    from sklearn.metrics import cohen_kappa_score
+    per = [pd.read_csv(f, encoding="utf-8-sig")[["id", "complexite"]].assign(src=f.stem) for f in gold_files]
+    g = pd.concat(per)
     gold = g.groupby("id").complexite.mean().round().astype(int)
     df["cx_gold"] = df.id.map(gold)
-    from sklearn.metrics import cohen_kappa_score
+    if len(per) >= 2:                                   # accord inter-annotateurs (deux premiers fichiers)
+        a, b = per[0].merge(per[1], on="id", suffixes=("_1", "_2")).pipe(lambda x: (x.complexite_1, x.complexite_2))
+        print(f"complexité : accord inter-annotateurs ({per[0].src[0]} vs {per[1].src[0]}, {len(a)} questions) "
+              f"kappa pondéré = {cohen_kappa_score(a, b, weights='quadratic'):.2f}")
     both = df.dropna(subset=["cx_gold"])
     proxy_num = both.cx_proxy.map({"faible": 1, "moyenne": 2, "élevée": 3})
     k = cohen_kappa_score(both.cx_gold.astype(int), proxy_num, weights="quadratic")

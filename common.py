@@ -37,6 +37,7 @@ N_FOLDS = 5               # validation croisée sur le reste
 MIN_CLASS_COUNT = 10      # en dessous, une classe est regroupée (voir étape 5)
 DEDUP_THRESHOLD = 0.85    # cosinus (n-grammes de caractères) : 0.85 regroupe aussi les questions qui partagent un même scénario
 LABEL_SOURCE = "base"     # "base" (final_* de Full_database) ou "plateforme" (group_id / keyword_id) — décision D1 : "base" (voir docs/DECISIONS.md)
+APPLY_AUTO_CORRECTIONS = True   # False : ignore data/label_corrections_auto.csv (étiquettes d'origine, hors corrections manuelles)
 
 # Niveaux dans l'ordre du cursus québécois (index = rang ordinal)
 LEVELS = [
