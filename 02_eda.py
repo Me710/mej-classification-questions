@@ -39,7 +39,8 @@ say(d[["dom_base", "domaine", "n", "part", "image", "mots", "fr"]].round(2).to_s
 missing = sorted(set(tax.dom_code) - set(m.dom_base.dropna()))
 say("domaines absents :", [f"{c} {dom_name[c]}" for c in missing])
 
-s = m.sub_base.value_counts().rename_axis("code").reset_index(name="n")
+s = (m.sub_base.value_counts().rename_axis("code").reset_index(name="n")
+       .sort_values(["n", "code"], ascending=[False, True], kind="mergesort"))   # ordre déterministe
 s["sous_domaine"] = s.code.map(sub_name)
 s.to_csv(REPORTS / "eda_sous_domaines.csv", index=False, encoding="utf-8-sig")
 say("\n== Sous-domaines :", len(s), "utilisés sur", len(tax),
