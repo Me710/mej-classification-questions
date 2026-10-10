@@ -1,0 +1,35 @@
+== 1. Base (final_*) vs plateforme (Iterations)
+domaine : 96.3% d'accord sur 326 questions
+sous-domaine : 56.4% d'accord
+principaux désaccords (plateforme -> base) : [['1.1', '1.2', 77], ['2.1', '2.3', 44], ['1.1', '2.3', 5], ['1.5', '2.6', 3], ['5.4', '5.3', 3], ['2.2', '2.4', 2]]
+
+== 2. Cohérence sémantique « Nombres entiers » (1.2, 2.3)
+279 questions étiquetées 'entiers' dans la base ; 2.2% contiennent un nombre négatif
+pour comparaison, 'naturels' (1.1, 2.1) : 93 questions, 0.0% avec un négatif
+plateforme : 1 question(s) 'entiers' sur 326 étiquetées
+'entiers' dont le niveau max est ≤ 4e année (contraire au programme) : 13
+
+== 3. Étiquette FR vs EN : 37 désaccords sur 512 (7.2%)
+
+== 4. Hiérarchie incohérente : 1 | sans étiquette : 2 | exactitude FAUX (FR ou EN) : 43
+
+== 5. Quasi-doublons (cosinus ≥ 0.85) : 1013 paires, 403 questions dans 108 groupes, dont 122 questions dans des groupes aux sous-domaines différents
+   q1 [5.3] Aujourd’hui, c’est le jour de la loterie chanceuse. Chaque élève de la classe de monsieur Nicolas reçoit un bi
+   q2 [5.2] Aujourd’hui, c’est le jour de la loterie chanceuse. Chaque élève de la classe de monsieur Nicolas reçoit un bi
+   q37 [2.3] Complète la phrase. Au comptoir postal, les timbres sont présentés sur des feuilles. Il y a 100 timbres par fe
+   q38 [3.1] Complète la phrase. Au comptoir postal, les timbres sont présentés sur des feuilles. Il y a 100 timbres par fe
+
+== 6. Fichiers synthétiques
+xlsx : 756 lignes, 9 lignes corrompues (colonnes décalées par '|'), position de la bonne réponse {'B': 0.446, 'A': 0.288, 'C': 0.233, 'D': 0.033}
+bilingue : 150 lignes, 20 questions uniques, bonne réponse absente des choix : 48
+
+== Bilan : questions avec au moins un signal : 414 / 981
+flag_conflict_dom               12
+flag_conflict_sub              142
+flag_entiers_sans_negatif      273
+flag_entiers_avant_3e_cycle     13
+flag_fr_en                      37
+flag_hierarchie                  1
+flag_sans_etiquette              2
+flag_inexact                    43
+flag_doublon_conflit           122

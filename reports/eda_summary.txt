@@ -1,0 +1,62 @@
+== Texte
+mots dans l'énoncé (stem) : {'count': 981.0, 'mean': 16.5, 'std': 13.8, 'min': 0.0, '25%': 7.0, '50%': 11.0, '75%': 21.0, 'max': 78.0}
+questions avec LaTeX : 54.4%
+nombre de choix : {0: 4, 1: 108, 2: 57, 3: 33, 4: 778, 5: 1}
+position de la bonne réponse (brut) : {1.0: 363, 2.0: 200, 3.0: 221, 4.0: 194, 5.0: 1}
+
+== Domaines (base Full_database)
+dom_base                            domaine   n  part  image  mots   fr
+       2 Opération sur les nombres (calcul) 331  0.34   0.68   9.0 1.00
+       1       Sens et écriture des nombres 265  0.27   0.56   8.0 0.98
+       5                        Probabilité 195  0.20   0.65  31.0 0.95
+       3                          Géométrie 134  0.14   0.87   8.5 0.92
+       6                        Statistique  23  0.02   0.87  21.0 0.48
+       4                             Mesure  19  0.02   0.63  18.0 1.00
+       7                            Algèbre   8  0.01   0.12  27.5 1.00
+       9          Mathématiques financières   3  0.00   1.00   8.0 0.33
+     NaN                                NaN   2  0.00   0.00   0.0 0.00
+       8            Mathématiques discrètes   1  0.00   1.00  20.0 1.00
+domaines absents : ['10 Fonctions']
+
+== Sous-domaines : 38 utilisés sur 59 | < 5 ex. : 16 | < 10 ex. : 24 | ≥ 30 ex. : 11
+sous-domaine incohérent avec son domaine (2024) : 1 [508]
+
+== Niveaux (Iterations, 328 questions)
+                   niveau   n
+        1e année primaire 104
+        2e année primaire 129
+        3e année primaire 195
+        4e année primaire 210
+        5e année primaire 289
+        6e année primaire 252
+      1e année secondaire 106
+      2e année secondaire  10
+      3e année secondaire   5
+4e année secondaire - CST   2
+ 4e année secondaire - TS   2
+ 4e année secondaire - SN   2
+5e année secondaire - CST   2
+ 5e année secondaire - TS   0
+ 5e année secondaire - SN   0
+                  Cégep 1   0
+                  Cégep 2   0
+           niveau général 193
+niveaux par question (hors 'niveau général') : {'count': 328.0, 'mean': 3.99, 'std': 1.25, 'min': 2.0, '25%': 3.0, '50%': 4.0, '75%': 5.0, 'max': 6.0}
+avec 'niveau général' : 58.8% | ensembles contigus : 100.0%
+combinaisons distinctes : 26
+
+== Types de question x domaine
+qtype     MULTIPLE_CHOICE  MULTIPLE_CHOICE_5  SHORT_ANSWER  TRUE_OR_FALSE
+dom_base                                                                 
+1                     181                  1            37             46
+2                     287                  0            42              2
+3                     117                  0             8              9
+4                      19                  0             0              0
+5                     175                  0            20              0
+6                      23                  0             0              0
+7                       5                  2             1              0
+8                       1                  0             0              0
+9                       3                  0             0              0
+
+== Image x domaine (part avec image)
+{'1': 0.56, '2': 0.68, '3': 0.87, '4': 0.63, '5': 0.65, '6': 0.87, '7': 0.12, '8': 1.0, '9': 1.0}

@@ -1,0 +1,9 @@
+﻿tâche,entrée,macro_F1,exactitude,MAE_annees
+domaine,x_stem,0.641 ± 0.045,0.840 ± 0.024,
+domaine,x_stem_choices,0.669 ± 0.081,0.844 ± 0.017,
+domaine,x_full,0.661 ± 0.079,0.847 ± 0.013,
+sous-domaine,x_stem,0.584 ± 0.059,0.703 ± 0.046,
+sous-domaine,x_stem_choices,0.636 ± 0.049,0.757 ± 0.029,
+sous-domaine,x_full,0.560 ± 0.056,0.737 ± 0.026,
+level_min,x_stem_choices,,0.669 ± 0.036,0.65 ± 0.10
+level_max,x_stem_choices,,0.558 ± 0.063,0.66 ± 0.12

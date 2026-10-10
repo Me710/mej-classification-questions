@@ -1,0 +1,12 @@
+# Données Math en Jeu (texte des questions) : non versionnées
+data/raw/*
+!data/raw/README.md
+data/interim/
+data/processed/
+reports/annotation_complexite.csv
+# Divers
+__pycache__/
+*.pyc
+.DS_Store
+.ipynb_checkpoints/
+.venv/
