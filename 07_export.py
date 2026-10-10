@@ -114,9 +114,14 @@ with open(llm / "fewshot_pool.jsonl", "w", encoding="utf-8") as f:
 (PROCESSED / "review").mkdir(exist_ok=True)
 rq = master[master.n_flags > 0].copy()
 rq["signaux"] = rq[[c for c in flag_cols if c != "n_flags"]].apply(lambda r: ", ".join(c[5:] for c, v in r.items() if v), axis=1)
-rq = rq.sort_values(["n_flags", "dup_cluster"], ascending=[False, True])
-rq[["id", "link_fr", "n_flags", "signaux", "dom_base", "sub_base", "dom_plat", "sub_plat", "dup_cluster",
-    "split", "x_stem_choices"]].assign(decision="", sous_domaine_corrige="", commentaire="") \
+auto_path = PROCESSED.parent / "label_corrections_auto.csv"
+auto = pd.read_csv(auto_path, encoding="utf-8-sig") if auto_path.exists() else pd.DataFrame(columns=["id", "a_verifier", "preuves"])
+rq = rq.merge(auto[["id", "a_verifier", "preuves"]].rename(columns={"preuves": "preuves_correction_auto"}), on="id", how="left")
+rq["a_verifier"] = rq.a_verifier.fillna(False).astype(bool)
+# priorité : corrections automatiques à vérifier (image), puis nombre de signaux
+rq = rq.sort_values(["a_verifier", "n_flags", "dup_cluster"], ascending=[False, False, True])
+rq[["id", "link_fr", "a_verifier", "n_flags", "signaux", "dom_base", "sub_base", "y_sub", "preuves_correction_auto",
+    "dom_plat", "sub_plat", "dup_cluster", "split", "x_stem_choices"]].assign(decision="", sous_domaine_corrige="", commentaire="") \
   .to_csv(PROCESSED / "review" / "review_queue.csv", index=False, encoding="utf-8-sig")
 
 # ---------------------------------------------------------------- test hors distribution (décision D5)
